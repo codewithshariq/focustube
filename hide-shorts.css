@@ -1,0 +1,33 @@
+/*
+  Each rule is gated by an attribute that content.js sets on <html>,
+  based on the toggles in the extension popup:
+    data-hys-home     -> homepage
+    data-hys-sidebar  -> side menu button
+    data-hys-search   -> search results
+*/
+
+/* ---------- Homepage ---------- */
+html[data-hys-home] ytd-rich-section-renderer:has(ytd-rich-shelf-renderer[is-shorts]),
+html[data-hys-home] ytd-rich-section-renderer:has(ytd-reel-shelf-renderer),
+html[data-hys-home] ytd-reel-shelf-renderer,
+html[data-hys-home] ytd-rich-item-renderer:has(a[href^="/shorts/"]) {
+  display: none !important;
+}
+
+/* ---------- Side menu (expanded and collapsed) ---------- */
+html[data-hys-sidebar] ytd-guide-entry-renderer:has(a[href^="/shorts"]),
+html[data-hys-sidebar] ytd-guide-entry-renderer:has(a[title="Shorts"]),
+html[data-hys-sidebar] ytd-mini-guide-entry-renderer[aria-label="Shorts"],
+html[data-hys-sidebar] ytd-mini-guide-entry-renderer:has(a[href^="/shorts"]) {
+  display: none !important;
+}
+
+/* ---------- Search results ---------- */
+html[data-hys-search] ytd-reel-shelf-renderer,
+html[data-hys-search] grid-shelf-view-model:has(ytm-shorts-lockup-view-model),
+html[data-hys-search] grid-shelf-view-model:has(ytm-shorts-lockup-view-model-v2),
+html[data-hys-search] grid-shelf-view-model:has(a[href^="/shorts/"]),
+html[data-hys-search] ytd-video-renderer:has(a[href^="/shorts/"]),
+html[data-hys-search] yt-chip-cloud-chip-renderer[data-hys-shorts-chip] {
+  display: none !important;
+}
